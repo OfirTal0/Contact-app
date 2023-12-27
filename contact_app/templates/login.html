@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'contact_app/style.css' %}">
+    <title>Login</title>
+</head>
+<body>
+    <div class="logincontainer">
+        <form class="boxlogin" action="" method="POST">
+            {% csrf_token %}
+            <img src="/static/contact_app/images/user1.jpg" class="loginimg">
+            <input type="text" class="logininput" name="username" id="" placeholder="Username" required>
+            <input type="password" class="logininput" name="password" id="" placeholder="Password" required>
+            <input type="submit" value = "Log in">
+
+            {{message}}
+        </form>
+
+    </div>
+</body>
+</html>

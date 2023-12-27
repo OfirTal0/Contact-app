@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block groups %}
+<h2>Groups</h2>
+<div class="groups">
+    {% for category in categories %}
+
+        <div class="group1">
+            <div class="groupheader">
+                <h3>{{category}}</h3>
+            </div>
+            <div class="groupcontacs">
+            {% for contact in contacts %}
+                {%if category == contact.category %}
+                    <div style="display:flex; flex-direction:column; align-items:center">
+                        <img src="{% static 'contact_app/images/contact.jpg' %}" class="contactimg">
+                        <div>{{contact.name}}</div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+

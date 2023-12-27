@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block dashbord %}
+
+<div class="dashbord">
+    <h2>Favorite</h2>
+    <div class="boxes">
+        {% for favorite_contact in user.favorites.all %}
+        <div class="favoritebox">
+            <form action="{% url 'crud' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="contact_to_remove" value= "{{favorite_contact.id}}">
+                <input class="remove_fav"  type="submit" name="remove_fav" value = "X">
+            </form>
+        <div class="" style="display:flex; flex-direction:row;">
+            <img src="{% static 'contact_app/images/contact.jpg' %}" class="contactimg">
+            <div style="margin-top:25px;">{{favorite_contact.name}}</div>
+        </div>
+        <div style="display:flex; flex-direction:row;gap:15px;">
+    
+            <img src="{% static 'contact_app/images/outlook.png' %}" class="contactlogo">
+            <img src="{% static 'contact_app/images/telephone.png' %}" class="contactlogo">
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+
+<div class="">
+    <div class="sectiontwonavbar">
+        <H2>Contact List</H2>
+        <form action="{% url 'search' %}" method="POST">
+            {% csrf_token %}
+            <input class="searchinput1" type="search" name="search" placeholder="search contact">
+        </form>
+        <form action="{% url 'crud' %}" method="POST" >
+                {% csrf_token %}
+            <input class="crudtext" type="submit" name="delete" value="delete">
+            <input class="crudtext" type="submit" name="update" value="update">
+    </div>   
+        {{ message }}
+        <div class="table-container">
+            <table class="contact-table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Category</th>
+                        <th>favorite</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                        <tr class="contact-row">
+                            <td><input type="radio" name="selected_contact" value="{{ contact.id }}"></td>
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.company }}</td>
+                            <td>{{ contact.email }}</td>
+                            <td>{{ contact.phone_number }}</td>
+                            <td>{{ contact.role }}</td>
+                            <td>{{ contact.category }}</td>
+                            <td><input class="star-button" type="submit" name="add_favorite" value="add"></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+</div>
+
+{% endblock %}

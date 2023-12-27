@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block updatecontact %}
+<form class="addcontactform" action="{% url 'update' contact_id=contact.id %}" method='POST'>
+    {% csrf_token %}
+    <H2>Update contact</H2>
+<div class="coulumns_container">
+
+    <div class="column">
+    <div class="inputdiv">
+    <label>Name</label>
+    <input type="text" class="logininput" name="name" id="" value="{{contact.name}}" required>
+    </div>
+    <div class="inputdiv">
+    <label>Email</label>
+    <input type="email" class="logininput" name="email" id="" value="{{contact.email}}">
+    </div>
+    <div class="inputdiv">
+    <label>Phone</label>
+    <input type="phone" class="logininput" name="phone_number" id="" value="{{contact.phone_number}}">
+    </div>
+</div>
+<div class="column">
+    <div class="inputdiv">
+        <label>Company</label>
+        <input type="text" class="logininput" name="company" id="" value="{{contact.company}}" required>
+    </div>
+    <div class="inputdiv">
+    <label>Role</label>
+    <input type="text" class="logininput" name="role" id="" value="{{contact.role}}">
+    </div>
+    <div class="inputdiv">
+        <label>Description</label>
+        <input type="text" class="logininput" name="description" id="" value="{{contact.description}}">
+    </div>
+</div>
+
+    <div class="column">
+    <div class="inputdiv">
+        <label>Category</label>
+    <select class="logininput" name="category" required>
+        <option value='{{contact.category}}'>{{contact.category}}</option>
+        {% for category in categories %}
+            {%if category != contact.category %}
+            <option value='{{category.category}}'>{{category.category}}</option>
+            {%endif%}
+        {% endfor %}
+    </select>
+    </div>
+</div>
+</div>
+
+<div class="">
+    <input class="crudtext" type="submit" name = "update" value = "Update">
+    <input class="crudtext" type="submit" name= "cancel" value = "Cancel">
+</div>
+</form>
+
+{{message}}
+{% endblock %}
+

@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'contact_app/style.css' %}">
+    <title>Contacts app</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="section1">
+        <div class="profilebar">
+            <h3>Good {{datetime}}, {{user.name}}!</h3>
+            <img src="{{ user.image.url }}" class="userimg">
+        </div>
+        <div class="navbar">
+            <a class="navbartext" href="{% url 'dashbord' %}">Dashbord</a>
+            <a class="navbartext" href="{% url 'add_contact' %}">Add contact</a>
+            <a class="navbartext" href="{% url 'groups' %}">Groups</a>
+            <a class="navbartext" href="settingpersonal.html">Personal detials</a>
+            <a style="margin-top:30px;"class="crudtext" href="{% url 'logout' %}">Log out</a>
+        </div>
+    </div>
+    <div class="section2">
+        {% block dashbord %}
+        {% endblock %}
+        {% block addcontact %}
+        {% endblock %}
+        {% block updatecontact %}
+        {% endblock %}
+        {% block groups %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
