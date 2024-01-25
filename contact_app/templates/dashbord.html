@@ -4,7 +4,7 @@
 {% block dashbord %}
 
 <div class="dashbord">
-    <h2>Favorite</h2>
+    <h2>My Favourites</h2>
     <div class="boxes">
         {% for favorite_contact in user.favorites.all %}
         <div class="favoritebox">
@@ -14,7 +14,7 @@
                 <input class="remove_fav"  type="submit" name="remove_fav" value = "X">
             </form>
         <div class="" style="display:flex; flex-direction:row;">
-            <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactimg">
+            <img src="{% static '/contact_app/images/user1.jpg' %}" class="contactimg">
             <div style="margin-top:25px;">{{favorite_contact.name}}</div>
         </div>
         <div style="display:flex; flex-direction:row;gap:15px;">
@@ -31,7 +31,7 @@
         <H2>Contact List</H2>
         <form action="{% url 'search' %}" method="POST">
             {% csrf_token %}
-            <input class="searchinput1" type="search" name="search" placeholder="search contact">
+            <input class="logininput" type="search" name="search" placeholder="search contact">
         </form>
         <form action="{% url 'crud' %}" method="POST" >
                 {% csrf_token %}
@@ -72,5 +72,6 @@
     </form>
 </div>
 </div>
+
 
 {% endblock %}

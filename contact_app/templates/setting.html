@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block setting %}
+<form class="addcontactform" action="{% url 'setting' %}" method='POST'>
+    {% csrf_token %}
+    <H2>Personal Setting</H2>
+<div class="coulumns_container">
+<div class="column">
+    <label for="imageInput">My profile picture:</label>
+    <img src="{{ user.image.url }}" class="userimg">
+    <label for="imageInput">To change picture:</label>
+    <input type="file" id="imageInput" name="image" accept="image/*">
+</div>
+
+<div class="column">
+    <div class="inputdiv">
+    <label>Name</label>
+    <input type="text" class="logininput" name="name" id="" value="{{user.name}}" required>
+    </div>
+    <div class="inputdiv">
+    <label>Address</label>
+    <input type="text" class="logininput" name="address" id="" value="{{user.address}}">
+    </div>
+    <div class="inputdiv">
+    <label>Phone</label>
+    <input type="phone" class="logininput" name="phone_number" id="" value="{{uesr.phone_number}}">
+    </div>
+</div>
+<div class="column">
+    <div class="inputdiv">
+        <label>Role</label>
+        <input type="text" class="logininput" name="role" id="" value="{{user.role}}" >
+    </div>
+    <div class="inputdiv">
+    <label>Birth day</label>
+    <input type="date" class="logininput" name="birthday" id="" value="{{user.birth_day}}">
+</div>
+    <div class="inputdiv">
+        <label>note</label>
+        <input type="text" class="logininput" name="note" id="" value="{{user.note}}">
+    </div>
+</div>
+
+</div>
+
+<div class="">
+    <input class="crudtext" type="submit" name = "update" value = "Update">
+    <input class="crudtext" type="submit" name= "cancel" value = "Cancel">
+</div>
+</form>
+
+{{message}}
+{% endblock %}
+

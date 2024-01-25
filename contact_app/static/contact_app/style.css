@@ -121,20 +121,6 @@ a {
 
 }
 
-.boxlogin {
-    border-radius: 30px;
-    box-shadow: 3px 3px gray ;
-    background-color: rgba(245, 245, 245, 0.489);
-    padding: 1%;
-    width: 350px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap:15px;
-    margin-top:25vh;
-}
 
 .logininput {
     padding: 5px;
@@ -145,14 +131,33 @@ a {
     background-color:rgba(245, 245, 245, 0.829);
 }
 
+.boxlogin {
+    border-radius: 30px;
+    box-shadow: 3px 3px gray ;
+    background-color: rgba(245, 245, 245, 0.489);
+    padding: 1%;
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:15px;
+    margin-top:25vh;
+}
+
+.formlogin {
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    align-items: center;
+    justify-content: center;
+
+}
+
 .loginimg {
     width: 40%;
 }
 
-.logincontainer {
-    display: flex;
-    justify-content: center;
-}
 
 .table-container {
     max-height: 40vh;
@@ -211,7 +216,7 @@ a {
     background-color: rgba(248, 177, 177, 0.749); 
     border-radius: 10px;
     padding: 5px;
-    width: 70px; 
+    width: fit-content; 
     color:black;   
 
     &:hover {
@@ -237,16 +242,6 @@ a {
     gap: 10px;
 }
 
-.searchinput1 {
-    background-color: rgba(237, 237, 237, 0.507); 
-    color: black;
-    width: 180px;
-    height: 30px;
-    border-radius: 20px;
-    padding:1%;
-    margin-left: 400px;
-}
-
 .sectiontwonavbar {
     display: flex;
     align-items: center;
@@ -264,15 +259,37 @@ a {
     }
 }
 
+
 .groups {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    overflow-y: auto;
+    height: 90vh;
 }
+
+::-webkit-scrollbar {
+    width: 12px; /* Set the width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Set the color of the thumb (the moving part) */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: transparent; /* Set the color of the track (the non-moving part) */
+  }
+
 .groupcontacs {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
+    gap:10px;
+}
+
+.coulmngroup {
+    display: flex;
+    flex-direction: column;
     gap:10px;
 }
 
@@ -291,4 +308,24 @@ a {
         transition: all 0.5s;
     }
 }
-/* 
+
+
+.employees {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    overflow-y: auto;
+    height: 90vh;
+}
+
+.employeecard {
+    border: solid 1px rgba(237, 237, 237, 0.749);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    padding:2%;
+    align-items: center;
+    overflow-y: auto;
+    height: 30vh;
+}

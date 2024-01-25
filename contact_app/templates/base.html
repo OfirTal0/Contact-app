@@ -9,6 +9,15 @@
     <title>Contacts app</title>
 </head>
 
+<script>
+    function changeColorNAV(linkId) {
+        let LinkEL = document.getElementById(linkId);
+        LinkEL.style.backgroundColor = "rgba(237, 237, 237, 0.18)";
+        LinkEL.style.color = "white";
+        console.log(linkId)
+    }
+</script>
+
 <body>
 <div class="container">
     <div class="section1">
@@ -17,11 +26,11 @@
             <img src="{{ user.image.url }}" class="userimg">
         </div>
         <div class="navbar">
-            <a class="navbartext" href="{% url 'dashbord' %}">Dashbord</a>
-            <a class="navbartext" href="{% url 'add_contact' %}">Add contact</a>
-            <a class="navbartext" href="{% url 'groups' %}">Groups</a>
-            <a class="navbartext" href="settingpersonal.html">Personal detials</a>
-            <a style="margin-top:30px;"class="crudtext" href="{% url 'logout' %}">Log out</a>
+            <a class="navbartext" id="dashbordLink" onclick= "changeColorNAV('dashbordLink')" href="{% url 'dashbord' %}">Dashbord</a>
+            <a class="navbartext" id="addLink" onclick="changeColorNAV('addLink')" href="{% url 'add_contact' %}">Add contact</a>
+            <a class="navbartext" id="groupsLink" onclick="changeColorNAV('groupsLink')" href="{% url 'groups' %}">Groups</a>
+            <a class="navbartext" id="personalLink" onclick="changeColorNAV('personalLink')" href="{% url 'setting' %}">Personal detials</a>
+            <a style="margin-top:20px;"class="crudtext" href="{% url 'logout' %}">Log out</a>
         </div>
     </div>
     <div class="section2">
@@ -33,7 +42,10 @@
         {% endblock %}
         {% block groups %}
         {% endblock %}
+        {% block setting %}
+        {% endblock %}
     </div>
 </div>
+
 </body>
 </html>

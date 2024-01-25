@@ -108,7 +108,6 @@ def update(request,contact_id):
     user_id = request.session.get("user_id")
     active_user = User.objects.get(id=user_id)
     categories = Category.objects.all()
-    contact = Contact.objects.get(id=contact_id)
     if request.method == 'POST':
         try:
             if 'update' in request.POST:
@@ -119,8 +118,9 @@ def update(request,contact_id):
                 role = request.POST.get('role', '')
                 description = request.POST.get('description', '')
                 category = request.POST.get('category', '')
-                contact_to_update = Contact.objects.filter(id=contact_id).update(name=name, email=email,phone_number=phone_number,category=Category.objects.get(category=category),role=role,description=description,company=company)
+                Contact.objects.filter(id=contact_id).update(name=name, email=email,phone_number=phone_number,category=Category.objects.get(category=category),role=role,description=description,company=company)
                 message = "Contact updated successfully"
+                contact = Contact.objects.get(id=contact_id)
                 return render(request, "update_contact.html", {"user": active_user,"categories":categories,"message":message,"contact":contact})
             if 'cancel' in request.POST:
                 return redirect('dashbord')
@@ -148,5 +148,30 @@ def groups(request):
     active_user = User.objects.get(id=user_id)
     categories = Category.objects.all()
     contacts = Contact.objects.all()
-    return render(request, "groups.html", {"user": active_user,"categories":categories,"contacts":contacts})
+    employees = User.objects.all()
+    return render(request, "groups.html", {"user": active_user,"categories":categories,"contacts":contacts,"employees":employees})
+
+def setting(request):
+    user_id = request.session.get("user_id")
+    active_user = User.objects.get(id=user_id)
+    categories = Category.objects.all()
+    if request.method == 'GET':
+        return render(request, "setting.html", {"user": active_user,"categories":categories})
+    if request.method == 'POST':
+        try:
+            name = request.POST.get('name', '').title()
+            address = request.POST.get('address', '')
+            phone_number = request.POST.get('phone_number', '')
+            role = request.POST.get('role', '')
+            birth_day = request.POST.get('birthday', '')
+            note = request.POST.get('note', '')
+            if birth_day == '':
+                birth_day = '1970-01-01'
+            User.objects.filter(id=user_id).update(name=name, address=address,phone_number=phone_number,birth_day=birth_day,role=role,note=note)
+            message = "Details updated successfully"
+            active_user = User.objects.get(id=user_id)
+            return render(request, "setting.html", {"user": active_user,"categories":categories, "message":message})
+        except:
+            message = "Problem adding the contact, please contact the administrator"
+            return render(request, "setting.html", {"user": active_user,"categories":categories, "message":message})
 
