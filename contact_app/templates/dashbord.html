@@ -2,74 +2,151 @@
 {% load static %}
 
 {% block dashbord %}
+<script src="{% static 'contact_app/js/js.js' %}" defer></script>
 
 <div class="dashbord">
     <h2>My Favourites</h2>
     <div class="boxes">
-        {% for favorite_contact in user.favorites.all %}
+        {% for favorite_task in user.favorites_tasks.all %}
         <div class="favoritebox">
             <form action="{% url 'crud' %}" method="POST">
                 {% csrf_token %}
-                <input type="hidden" name="contact_to_remove" value= "{{favorite_contact.id}}">
+                <input type="hidden" name="task_to_remove" value= "{{favorite_task.id}}">
                 <input class="remove_fav"  type="submit" name="remove_fav" value = "X">
+                
             </form>
-        <div class="" style="display:flex; flex-direction:row;">
-            <img src="{% static '/contact_app/images/user1.jpg' %}" class="contactimg">
-            <div style="margin-top:25px;">{{favorite_contact.name}}</div>
-        </div>
-        <div style="display:flex; flex-direction:row;gap:15px;">
-    
-            <img src="{% static 'contact_app/images/outlook.png' %}" class="contactlogo">
-            <img src="{% static 'contact_app/images/telephone.png' %}" class="contactlogo">
-        </div>
+            <div style="margin-top:25px;">{{favorite_task.title}}</div>
+            <div style="margin-top:25px;">Due date: {{favorite_task.due_date}}</div>
+            
         </div>
         {% endfor %}
     </div>
 
 <div class="">
     <div class="sectiontwonavbar">
-        <H2>Contact List</H2>
+        <button onclick="DashbordMyTask()" id="tasksButtonMy" class="tasksButtonMy">My Open Tasks List</button>
+        <button onclick="DashbordAllTask()" id="tasksButtonAll" class="tasksButtonAll">All Tasks</button>
         <form action="{% url 'search' %}" method="POST">
             {% csrf_token %}
-            <input class="logininput" type="search" name="search" placeholder="search contact">
+            <input onsubmit="DashbordSearchedTask()" class="logininput" type="search" name="search" placeholder="search task">
         </form>
         <form action="{% url 'crud' %}" method="POST" >
                 {% csrf_token %}
             <input class="crudtext" type="submit" name="delete" value="delete">
             <input class="crudtext" type="submit" name="update" value="update">
+            <input class="crudtext" type="submit" name="open" value="open">
     </div>   
-        {{ message }}
-        <div class="table-container">
+        <div id="my_tasks" class="table-container">
             <table class="contact-table">
                 <thead>
                     <tr>
                         <th>Select</th>
-                        <th>Name</th>
-                        <th>Company</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Role</th>
-                        <th>Category</th>
-                        <th>favorite</th>
+                        <th>Title</th>
+                        <th>Categoty</th>
+                        <th>Description</th>
+                        <th>Due date</th>
+                        <th>responsible</th>
+                        <th>Related contacts</th>
+                        <th>Favorite</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for contact in contacts %}
+                    {% for my_task in my_tasks %}
                         <tr class="contact-row">
-                            <td><input type="radio" name="selected_contact" value="{{ contact.id }}"></td>
-                            <td>{{ contact.name }}</td>
-                            <td>{{ contact.company }}</td>
-                            <td>{{ contact.email }}</td>
-                            <td>{{ contact.phone_number }}</td>
-                            <td>{{ contact.role }}</td>
-                            <td>{{ contact.category }}</td>
+                            <td><input type="radio" name="selected_task" value="{{ my_task.id }}"></td>
+                            <td>{{ my_task.title }}</td>
+                            <td>{{ my_task.category }}</td>
+                            <td>{{ my_task.description }}</td>
+                            <td>{{ my_task.due_date }}</td>
+                            <td>{{ my_task.responsible }}</td>
+
+                            <td style="display:flex; flex-direction:column; overflow-y:auto; height:5vh;">
+                                {% for related_contact in my_task.related_contacts.all %}
+                                    <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
+                                        <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactlogo">
+                                        {{ related_contact.name }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+
                             <td><input class="star-button" type="submit" name="add_favorite" value="add"></td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+
+        <div id="all_tasks" class="table-container" style="display:none">
+            <table class="contact-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Categoty</th>
+                        <th>Description</th>
+                        <th>Due date</th>
+                        <th>responsible</th>
+                        <th>Related contacts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr class="contact-row">
+                            <td>{{ task.title }}</td>
+                            <td>{{ task.category }}</td>
+                            <td>{{ task.description }}</td>
+                            <td>{{ task.due_date }}</td>
+                            <td>{{ task.responsible }}</td>
+                            <td style="display:flex; flex-direction:column; overflow-y:auto; height:5vh;">
+                                {% for related_contact in task.related_contacts.all %}
+                                    <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
+                                        <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactlogo">
+                                        {{ related_contact.name }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div id="searched_tasks" class="table-container" style="display:none">
+            <table class="contact-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Categoty</th>
+                        <th>Description</th>
+                        <th>Due date</th>
+                        <th>responsible</th>
+                        <th>Related contacts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                        <tr class="contact-row">
+                            <td>{{ task.title }}</td>
+                            <td>{{ task.category }}</td>
+                            <td>{{ task.description }}</td>
+                            <td>{{ task.due_date }}</td>
+                            <td>{{ task.responsible }}</td>
+                            <td style="display:flex; flex-direction:column; overflow-y:auto; height:5vh;">
+                                {% for related_contact in task.related_contacts.all %}
+                                    <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
+                                        <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactlogo">
+                                        {{ related_contact.name }}
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {{ message }}
+
     </form>
+
 </div>
 </div>
 

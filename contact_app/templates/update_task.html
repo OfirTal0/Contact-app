@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+<script src="{% static 'contact_app/js/js.js' %}" defer></script>
+
+{% block updatetask %}
+<form class="addcontactform" action="{% url 'update' task_id=task.id %}" method='POST'>
+    {% csrf_token %}
+    <H2>Update Task</H2>
+<div class="coulumns_container">
+    <div class="column">
+        <div class="inputdiv">
+            <label>Title</label>
+            <input type="text" class="logininput" name="title" id="" value="{{task.title}}" placeholder="Title" required>
+        </div>
+        <div class="inputdiv">
+            <label>Description</label>
+            <input type="text" class="logininput" name="description" id="" value="{{task.description}}" placeholder="Description">
+        </div>
+        <div class="inputdiv">
+                <label>responsible</label>
+            <select class="logininput" name="responsible" value="{{task.responsible}}" required>
+                {% for user in users %}
+                <option value='{{user.name}}'>{{user.name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="inputdiv">
+            <label>Completed</label>
+            <input type="checkbox" class="logininput" name="completed" {% if task.completed %}checked{% endif %}>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="inputdiv">
+            <label>Due date</label>
+            <input type="date" class="logininput" name="due_date" value="{{ task.due_date|date:'Y-m-d' }}" id="" required>
+        </div>
+        <div class="inputdiv">
+                <label>Category</label>
+            <select class="logininput" name="category" required>
+                <option value='{{task.category}}'>{{task.category}}</option>
+                {% for category in categories %}
+                    {%if category != task.category %}
+                    <option value='{{category.category}}'>{{category.category}}</option>
+                    {%endif%}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+       
+        <div class="column">
+            <div class="inputdiv">
+                <label>Related employees</label>
+                {% for user in users %}
+                <div class="">
+                    <input type="checkbox" name="related_employees" value="{{ user.id }}" {% if user in task.related_employees.all %}checked{% endif %}>
+                    <label>{{ user.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="column">
+            <div class="inputdiv">
+                <label>Related contacts</label>
+                {% for contact in contacts %}
+                <div class="">
+                    <input type="checkbox" name="related_contacts" value="{{ contact.id }}" {% if contact in task.related_contacts.all %}checked{% endif %}>
+                    <label>{{ contact.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+<div class="">
+    <input class="crudtext" type="submit" name = "update" value = "Update">
+    <input class="crudtext" type="submit" name= "cancel" value = "Cancel">
+</div>
+</form>
+
+{{message}}
+{% endblock %}
+

@@ -6,29 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'contact_app/style.css' %}">
+    <script src="{% static 'contact_app/js/js.js' %}" defer></script>
     <title>Contacts app</title>
 </head>
-
-<script>
-    function changeColorNAV(linkId) {
-        let LinkEL = document.getElementById(linkId);
-        LinkEL.style.backgroundColor = "rgba(237, 237, 237, 0.18)";
-        LinkEL.style.color = "white";
-        console.log(linkId)
-    }
-</script>
 
 <body>
 <div class="container">
     <div class="section1">
         <div class="profilebar">
             <h3>Good {{datetime}}, {{user.name}}!</h3>
+            {%if user.image%}
             <img src="{{ user.image.url }}" class="userimg">
+            {%else%}
+            <img src="{% static 'contact_app/images/user1.jpg' %}" class="userimg">
+            {%endif%}
         </div>
         <div class="navbar">
-            <a class="navbartext" id="dashbordLink" onclick= "changeColorNAV('dashbordLink')" href="{% url 'dashbord' %}">Dashbord</a>
-            <a class="navbartext" id="addLink" onclick="changeColorNAV('addLink')" href="{% url 'add_contact' %}">Add contact</a>
-            <a class="navbartext" id="groupsLink" onclick="changeColorNAV('groupsLink')" href="{% url 'groups' %}">Groups</a>
+            <a class="navbartext" id="dashbordLink" onclick="changeColorNAV('dashbordLink')" href="{% url 'dashbord' %}">Dashbord</a>
+            <a class="navbartext" id="addLink" onclick="changeColorNAV('addLink')" href="{% url 'add_task' %}">Add Task</a>
+            <a class="navbartext" id="groupsLink" onclick="changeColorNAV('groupsLink')" href="{% url 'contacts' %}">Contacts</a>
             <a class="navbartext" id="personalLink" onclick="changeColorNAV('personalLink')" href="{% url 'setting' %}">Personal detials</a>
             <a style="margin-top:20px;"class="crudtext" href="{% url 'logout' %}">Log out</a>
         </div>
@@ -36,13 +32,15 @@
     <div class="section2">
         {% block dashbord %}
         {% endblock %}
-        {% block addcontact %}
+        {% block addtask %}
         {% endblock %}
-        {% block updatecontact %}
+        {% block updatetask %}
         {% endblock %}
         {% block groups %}
         {% endblock %}
         {% block setting %}
+        {% endblock %}
+        {% block card %}
         {% endblock %}
     </div>
 </div>

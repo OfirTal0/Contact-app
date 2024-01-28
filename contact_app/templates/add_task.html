@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block addtask %}
+<form class="addcontactform" action="{% url 'add_task' %}" method="POST">
+    {% csrf_token %}
+    <H2>Add new task</H2>
+
+<div class="coulumns_container">
+    <div class="column">
+        <div class="inputdiv">
+        <label>Title</label>
+        <input type="text" class="logininput" name="title" id="" placeholder="Title" required>
+        </div>
+        <div class="inputdiv">
+        <label>Description</label>
+        <input type="text" class="logininput" name="description" id="" placeholder="Description">
+        </div>
+        <div class="column">
+            <div class="inputdiv">
+                <label>responsible</label>
+            <select class="logininput" name="responsible" required>
+                {% for user in users %}
+                <option value='{{user.name}}'>{{user.name}}</option>
+                {% endfor %}
+            </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="inputdiv">
+            <label>Category</label>
+        <select class="logininput" name="category" required>
+            {% for category in categories %}
+            <option value='{{category.category}}'>{{category.category}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="inputdiv">
+            <label>Due date</label>
+            <input type="date" class="logininput" name="due_date" id="" placeholder="Due date" required>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="inputdiv">
+            <label>Related employees</label>
+            {% for user in users %}
+            <div class="">
+            <input type="checkbox"  name="related_employees" value="{{user.id}}">
+            <label>{{user.name}}</label>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="inputdiv">
+            <label>Related contacts</label>
+            {% for contact in contacts %}
+            <div class="">
+            <input type="checkbox" name="related_contacts" value="{{contact.id}}">
+            <label>{{contact.name}}</label>
+            </div>            
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+<div class="">
+    <input class="crudtext" type="submit"  name="add_task" value = "Add">
+    <input class="crudtext" type="submit" name= "cancel" value = "Cancel">
+</div>
+</form>
+
+{{message}}
+
+
+{% endblock %}

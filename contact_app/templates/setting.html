@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+<script src="{% static 'contact_app/js/js.js' %}"></script>
 
 {% block setting %}
 <form class="addcontactform" action="{% url 'setting' %}" method='POST'>
@@ -34,7 +35,7 @@
     </div>
     <div class="inputdiv">
     <label>Birth day</label>
-    <input type="date" class="logininput" name="birthday" id="" value="{{user.birth_day}}">
+    <input type="date" class="logininput" name="birthday" id="" value="{{ user.birth_day|date:'Y-m-d' }}">
 </div>
     <div class="inputdiv">
         <label>note</label>

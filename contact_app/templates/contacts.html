@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+<script src="{% static 'contact_app/js/js.js' %}"></script>
+
+{% block groups %}
+<div class="groups">
+    <div class="coulmngroup">
+        <h2>Contacts</h2>
+    {% for category in categories %}
+        <div class="group1">
+            <div class="groupheader">
+                <h3>{{category}}</h3>
+            </div>
+            <div class="groupcontacs">
+                {% for contact in contacts %}
+                    {% if category == contact.category %}
+                        <div style="display:flex; flex-direction:column; align-items:center">
+                            <a href="{% url 'card' contact.id 'contact' %}">
+                                <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactimg">
+                                <div>{{ contact.name }}</div>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+    <div class="coulmngroup">
+        <h2>Team</h2>
+        <div class="employees">
+            {% for contact in employees %}
+            <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
+                <a href="{% url 'card' contact.id 'user' %}" style="display:flex; flex-direction:column; align-items:center;">
+                    <h3>{{ contact.name.title }}</h3>
+                    {%if contact.image%}
+                    <img src="{{ contact.image.url }}" class="userimg">
+                    {%else%}
+                    <img src="{% static 'contact_app/images/user1.jpg' %}" class="userimg">
+                    {%endif%}                     <div>{{ contact.role.title }}</div>
+                    {%if contact.name == user.name %}
+                    <a class="crudtext" href="{% url 'setting' %}">Edit</a>
+                    {% endif %}
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

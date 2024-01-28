@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+<script src="{% static 'contact_app/js/js.js' %}"></script>
+
+{% block card %}
+
+{% if type == "contact" %}
+    <div class="contactCard">
+        <h3 style="margin:0;">Contact Details</h3>
+        <h3>{{contact.name}}</h3>
+        <img src="{% static 'contact_app/images/user1.jpg' %}" class="userimg">
+        <div class="">{{contact.category}}</div>
+        <div class="">Company: {{contact.company}}</div>
+        <div class="">Role: {{contact.role}}</div>
+        <div class="">Mail: {{contact.email}}</div>
+        <div class="">Number: {{contact.phone_number}}</div>
+        <div class="">{{contact.description}}</div>
+    </div>
+{%endif%}
+
+{% if type == "user" %}
+<div class="contactCard">
+    <h3 style="margin:0;">Employee Details</h3>
+    <h3>{{contact.name}}</h3>
+    {%if contact.image%}
+        <img src="{{ contact.image.url }}" class="userimg">
+        {%else%}
+        <img src="{% static 'contact_app/images/user1.jpg' %}" class="userimg">
+    {%endif%} 
+    <div class="">My Role: {{contact.role.title}}</div>
+    <div class="">My Number: {{contact.phone_number}}</div>
+    <div class="">My Address: {{contact.address.title}}</div>
+    <div class="">My Birthday: {{contact.birth_day}}</div>
+    <h3>My Note: {{contact.note.title}}</h3>
+</div>
+{%endif%}
+
+{% if type == "task" %}
+<div class="contactCard">
+    <h3 style="margin:0;">Task Details</h3>
+    <h3>{{task.title}}</h3>
+    <div>{{task.category}}</div>
+    <div class="">{{task.description}}</div>
+    <div class="">Responsible: {{task.responsible}}</div>
+    <div class="">Due date: {{task.due_date}}</div>
+    <div class="">Created at: {{task.created_at}}</div>
+    <div class="">Created by: {{task.created_by}}</div>
+    <label for="">Related contacts:</label>
+    <div style="display:flex">
+    {% for related_contact in task.related_contacts.all %}
+    <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
+        <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactlogo">
+        {{ related_contact.name }}
+    </div>
+    {% endfor %}
+    </div>
+
+    <label for="">Related employees:</label>
+    <div style="display:flex">
+
+    {% for related_employee in task.related_employees.all %}
+    <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
+        {%if related_employee.image%}
+        <img src="{{ related_employee.image.url }}"  class="contactlogo">
+        {%else%}
+        <img src="{% static 'contact_app/images/user1.jpg' %}"  class="contactlogo">
+        {%endif%}        
+    {{ related_employee.name }}
+    </div>
+{% endfor %}
+</div>
+
+</div>
+{%endif%}
+
+{% endblock %}
+

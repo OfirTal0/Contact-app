@@ -6,25 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'contact_app/style.css' %}">
+    <script src="{% static 'contact_app/js/js.js' %}" defer></script>
+
     <title>Login</title>
 </head>
-<script>
-    function validateLogin(){
-        message.innerHTML="";
-        let valid=true;
-        Array.from(document.getElementById("loginForm").getElementsByTagName("input")).map(
-            item=>{
-                if (item.value==""){
-                    message.innerHTML+=`Please fill out the ${item.name} <br>`;
-                    item.style.borderColor="red";
-                    valid=false;
-                }
-            })
-        if (valid){
-            loginForm.submit();
-        }
-    }
-</script>
+
 <body style = "display:flex; justify-content: center;">
     <div class="boxlogin">
         <form class="formlogin"  id="loginForm" action="{% url 'login' %}" method="POST">
