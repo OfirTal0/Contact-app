@@ -13,11 +13,13 @@
                 {% csrf_token %}
                 <input type="hidden" name="task_to_remove" value= "{{favorite_task.id}}">
                 <input class="remove_fav"  type="submit" name="remove_fav" value = "X">
-                
             </form>
-            <div style="margin-top:25px;">{{favorite_task.title}}</div>
-            <div style="margin-top:25px;">Due date: {{favorite_task.due_date}}</div>
-            
+            <h3 style="margin:0;">{{favorite_task.title}}</h3>
+            <div>Due date: {{favorite_task.due_date}}</div>
+            <form action="{% url 'card' favorite_task.id 'task' %}">
+                {% csrf_token %}
+                <input class="crudtext" type="submit" value="open">
+            </form>
         </div>
         {% endfor %}
     </div>
@@ -35,7 +37,8 @@
             <input class="crudtext" type="submit" name="delete" value="delete">
             <input class="crudtext" type="submit" name="update" value="update">
             <input class="crudtext" type="submit" name="open" value="open">
-    </div>   
+    </div> 
+    {{message}}  
         <div id="my_tasks" class="table-container">
             <table class="contact-table">
                 <thead>
@@ -45,7 +48,7 @@
                         <th>Categoty</th>
                         <th>Description</th>
                         <th>Due date</th>
-                        <th>responsible</th>
+                        <th>Responsible</th>
                         <th>Related contacts</th>
                         <th>Favorite</th>
                     </tr>
@@ -84,8 +87,10 @@
                         <th>Categoty</th>
                         <th>Description</th>
                         <th>Due date</th>
-                        <th>responsible</th>
+                        <th>Responsible</th>
                         <th>Related contacts</th>
+                        <th>Completed</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -104,6 +109,8 @@
                                     </div>
                                 {% endfor %}
                             </td>
+                            <td>{{ task.completed }}</td>
+
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -143,10 +150,8 @@
                 </tbody>
             </table>
         </div>
-        {{ message }}
 
-    </form>
-
+    </form>       
 </div>
 </div>
 

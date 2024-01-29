@@ -13,5 +13,5 @@ urlpatterns = [
     path("logout/", views.logout, name="logout"),
     path("setting/", views.setting, name="setting"),
     path("card/<int:contact_id>/<str:type>/", views.card, name="card"),
-
+    path("add_contact/", views.add_contact, name="add_contact"),
 ]

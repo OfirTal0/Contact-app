@@ -84,7 +84,7 @@ def add_task(request):
 
                 task.related_employees.set(User.objects.filter(id__in=related_employees_ids))
                 task.related_contacts.set(Contact.objects.filter(id__in=related_contacts_ids))
-
+                
                 message = "Task added successfully"
                 return render(request, "add_task.html", {"user": active_user, "categories": categories, "message": message, "users": users, "contacts": contacts})
             except: 
@@ -109,8 +109,7 @@ def crud(request):
         if 'remove_fav' in request.POST:
             active_user.favorites_tasks.remove(task)
             active_user.save()
-            message = "Task remove favorites"
-            return index(request, message=message)
+            return index(request, message="")
         elif 'delete' in request.POST:
             task.delete()
             return index(request, message="")
@@ -127,8 +126,7 @@ def crud(request):
             else:
                 active_user.favorites_tasks.add(task)
                 active_user.save()
-                message = "Task added to favorites"
-            return index(request, message=message)
+            return index(request, message="")
         
 
 def update(request,task_id):
@@ -182,7 +180,9 @@ def contacts(request):
     categories = Category.objects.all()
     contacts = Contact.objects.all()
     employees = User.objects.all()
-    return render(request, "contacts.html", {"user": active_user,"categories":categories,"contacts":contacts,"employees":employees})
+    date_time = get_date_time()
+
+    return render(request, "contacts.html", {"user": active_user,"categories":categories,"contacts":contacts,"employees":employees,"datetime":date_time})
 
 def setting(request):
     user_id = request.session.get("user_id")
@@ -217,4 +217,37 @@ def card(request,contact_id,type):
         contact = Contact.objects.get(id=contact_id)
     if type == "user":
         contact = User.objects.get(id=contact_id)
+    if type == "task":
+        task = Task.objects.get(id=contact_id)
+        return render(request, "card.html", {"user": active_user,"type":type,"task": task})
     return render(request, "card.html", {"user": active_user,"type":type,"contact": contact})
+
+
+def add_contact(request):
+    user_id = request.session.get("user_id")
+    active_user = User.objects.get(id=user_id)
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        if 'cancel' in request.POST:
+            return redirect('dashboard')
+        if 'add_contact' in request.POST:
+            try: 
+                name = request.POST.get('name', '').title()
+                email = request.POST.get('email', '')
+                phone_number = request.POST.get('phone_number', '')
+                company = request.POST.get('company', '').title()
+                role = request.POST.get('role', '')
+                description = request.POST.get('description', '')
+                category = request.POST.get('category', '')
+                if Contact.objects.filter(email=email).exists() or Contact.objects.filter(name=name).exists():
+                    message = "Contact with name\email already exists"
+                    return render(request, "add_contact.html", {"user": active_user,"categories":categories,"message":message})
+                else:
+                    contact = Contact(name=name,email=email,phone_number=phone_number,company=company,role=role,description=description,category=Category.objects.get(category=category))
+                    contact.save()
+                    message = "Contact added successfully"
+                    return render(request, "add_contact.html", {"user": active_user,"categories":categories,"message":message})
+            except:
+                message = "Problem adding the contact, please contact the administrator"
+                return render(request, "add_contact.html", {"user": active_user,"categories":categories,"message":message})
+    return render(request, "add_contact.html", {"user": active_user,"categories":categories})

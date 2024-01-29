@@ -5,7 +5,10 @@
 {% block groups %}
 <div class="groups">
     <div class="coulmngroup">
-        <h2>Contacts</h2>
+        <div style="display:flex; align-items:center; gap:20px;">
+            <h2>Contacts</h2>
+            <a class="crudtext" href="{% url 'add_contact' %}">Add Contact</a>
+        </div>
     {% for category in categories %}
         <div class="group1">
             <div class="groupheader">

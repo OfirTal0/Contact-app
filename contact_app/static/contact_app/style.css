@@ -24,6 +24,12 @@ body {
     gap: 1%;
 }
 
+.dashbord {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
 .section1{
     display: flex;
     flex-direction: column;
@@ -90,22 +96,23 @@ a {
 .boxes {
     display: flex;
     gap: 1%;
-    overflow-x: auto;
+    overflow-x:scroll;
     width: 70vw;
     padding:1%;
 }
 
 .favoritebox {
     background-color: rgba(237, 237, 237, 0.749); 
-    width: 180px;
-    height: 110px;
+    width: 15vw;
+    height: 20vh;
     border-radius: 20px;
     padding:1%;
     display: flex;
     flex-direction: column;
     color: rgb(68, 68, 68);
-    gap:5px;
     align-items: center;
+    gap: 2vh;
+    overflow-y: auto;
 
     &:hover {
         background-color: rgba(237, 237, 237); 
@@ -221,7 +228,7 @@ a {
     color:black;   
 
     &:hover {
-        background-color: rgba(237, 237, 237, 0.18);   
+        background-color: rgba(88, 85, 85, 0.701);   
         color:white;
         transition: all 0.5s;
         box-shadow: 1px 1px  rgba(248, 177, 177, 0.749) ;
@@ -332,7 +339,7 @@ a {
     font-size: large;
 }
 
-.tasksButtonAll {
+.tasksButtonAll  {
     background-color: transparent;
     color: white;
     padding: 1%;

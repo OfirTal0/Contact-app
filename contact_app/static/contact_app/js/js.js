@@ -39,6 +39,7 @@ function DashbordAllTask() {
     myTask.style.display = "none";
     let searchedTask = document.getElementById("searched_tasks");
     searchedTask.style.display = "none";
+
 }
 
 function DashbordMyTask() {

@@ -40,7 +40,9 @@
     <h3 style="margin:0;">Task Details</h3>
     <h3>{{task.title}}</h3>
     <div>{{task.category}}</div>
-    <div class="">{{task.description}}</div>
+    {%if task.description%}
+    <div class="">Description: {{task.description}}</div>
+    {%endif%}
     <div class="">Responsible: {{task.responsible}}</div>
     <div class="">Due date: {{task.due_date}}</div>
     <div class="">Created at: {{task.created_at}}</div>
