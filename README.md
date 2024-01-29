@@ -21,7 +21,7 @@ A web-based application that helps users organize and manage their tasks effecti
 1. Download the project.
 2. Run the project using Django.
 3. Enter user details:
-   Any username with the password 12345.
+   Any username In users table in DB with the password 12345.
    For example:
    User: Ofir Tal
    Password: 12345
