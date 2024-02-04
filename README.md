@@ -30,3 +30,4 @@ A web-based application that helps users organize and manage their tasks and con
 ## Needs correction and completion:
 
 - Editing user profile picture from the application
+- Change files name in django to task manager (and not contact app).
