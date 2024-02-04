@@ -1,20 +1,20 @@
 # Task Manger & Contacts project 
 
-A web-based application that helps users organize and manage their tasks effectively, and include contacts to each project.
+A web-based application that helps users organize and manage their tasks and contacts effectively. 
 
 ## Features
 
-- Create, edit, and delete tasks
-- create contacts
-- Assign tasks to specific users and related contacts
-- Add Favorites tasks to each user
-- View a dashboard with an overview of all tasks, deadlines, and user-specific non-completed tasks
-- Set due dates and responsibole user to each task
-- Categorize tasks into different projects or categories
-- Search tasks based on text
-- Categorize contacts into different tasks or categories
-- Display of user/contact/task details in a specific card
-- Modify and update your personal details with a preview of the previous information for reference.
+- Create, edit, and delete tasks and contacts.
+- A user-customized dashbord with the option to view all tasks or only non-completed tasks that assigned to the user.
+- Assign tasks to specific users and assign specific related contacts.
+- Add Favorites tasks to each user for quick access.
+- Search tasks based on text.
+- Display of user/contact/task details in a specific card. 
+- Set due dates and responsibole user to each task and categorieze them.
+- display of company employee and contacts and categorize them. 
+- Display of user/contact/task details in a specific card (only of the information filled in).
+- Modify and update the user personal details with a preview of the previous information for reference.
+- Validation of login details - notification if a field is not filled or if the user does not exist.
 
 ## Getting Started
 
@@ -22,12 +22,11 @@ A web-based application that helps users organize and manage their tasks effecti
 2. Run the project using Django.
 3. Enter user details:
    Any username In users table in DB with the password 12345.
+
    For example:
    User: Ofir Tal
    Password: 12345
 
 ## Needs correction and completion:
 
-- Deletion and editing of contacts
-- Fixing the search feature
 - Editing user profile picture from the application
