@@ -14,4 +14,6 @@ urlpatterns = [
     path("setting/", views.setting, name="setting"),
     path("card/<int:contact_id>/<str:type>/", views.card, name="card"),
     path("add_contact/", views.add_contact, name="add_contact"),
+    path("crud_contact/", views.crud_contact, name="crud_contact"),
+    path("update_contact/<int:contact_id>/", views.update_contact, name="update_contact"),
 ]

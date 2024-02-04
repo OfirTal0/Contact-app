@@ -36,11 +36,8 @@
             <div style="display:flex; flex-direction:column; gap:10px; align-items:center;">
                 <a href="{% url 'card' contact.id 'user' %}" style="display:flex; flex-direction:column; align-items:center;">
                     <h3>{{ contact.name.title }}</h3>
-                    {%if contact.image%}
-                    <img src="{{ contact.image.url }}" class="userimg">
-                    {%else%}
-                    <img src="{% static 'contact_app/images/user1.jpg' %}" class="userimg">
-                    {%endif%}                     <div>{{ contact.role.title }}</div>
+                    <img src="{{ contact.image.url }}" class="userimg">               
+                    <div>{{ contact.role.title }}</div>
                     {%if contact.name == user.name %}
                     <a class="crudtext" href="{% url 'setting' %}">Edit</a>
                     {% endif %}

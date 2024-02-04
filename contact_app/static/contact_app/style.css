@@ -95,8 +95,9 @@ a {
 
 .boxes {
     display: flex;
+    flex-direction: row;
     gap: 1%;
-    overflow-x:scroll;
+    overflow-x: auto;
     width: 70vw;
     padding:1%;
 }
@@ -112,7 +113,6 @@ a {
     color: rgb(68, 68, 68);
     align-items: center;
     gap: 2vh;
-    overflow-y: auto;
 
     &:hover {
         background-color: rgba(237, 237, 237); 
@@ -278,16 +278,19 @@ a {
 }
 
 ::-webkit-scrollbar {
-    width: 12px; 
+    width: 5px; 
   }
   
   ::-webkit-scrollbar-thumb {
-    background-color: transparent; /* Set the color of the thumb (the moving part) */
+    background-color: rgba(190, 156, 156, 0.655);
+    border-radius: 20px;
   }
   
   ::-webkit-scrollbar-track {
-    background-color: transparent; /* Set the color of the track (the non-moving part) */
-  }
+    background-color:white;
+    border-radius: 20px;
+
+  } 
 
 .groupcontacs {
     display: grid;
@@ -311,7 +314,7 @@ a {
     border-radius: 20px;
     padding:5%;
     color: rgb(68, 68, 68);
-    overflow-y: auto;
+    overflow-y: scroll;
     &:hover {
         background-color: rgba(237, 237, 237); 
         transition: all 0.5s;
@@ -325,6 +328,7 @@ a {
     gap: 20px;
     overflow-y: auto;
     height: 90vh;
+    width: 40vw;
 }
 
 
@@ -334,7 +338,6 @@ a {
     padding: 1%;
     cursor: pointer;
     border: none;
-    border-bottom: solid 1px white;
     font-weight: bolder;
     font-size: large;
 }
@@ -347,6 +350,8 @@ a {
     border: none;
     font-weight: bolder;
     font-size: large;
+    border-bottom: solid 1px white;
+
 }
 
 .contactCard {

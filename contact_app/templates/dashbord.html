@@ -4,6 +4,7 @@
 {% block dashbord %}
 <script src="{% static 'contact_app/js/js.js' %}" defer></script>
 
+
 <div class="dashbord">
     <h2>My Favourites</h2>
     <div class="boxes">
@@ -26,12 +27,14 @@
 
 <div class="">
     <div class="sectiontwonavbar">
-        <button onclick="DashbordMyTask()" id="tasksButtonMy" class="tasksButtonMy">My Open Tasks List</button>
         <button onclick="DashbordAllTask()" id="tasksButtonAll" class="tasksButtonAll">All Tasks</button>
-        <form action="{% url 'search' %}" method="POST">
+        <button onclick="DashbordMyTask()" id="tasksButtonMy" class="tasksButtonMy">My Open Tasks List</button>
+
+        <form id="searchForm" action="{% url 'search' %}" method="POST">
             {% csrf_token %}
-            <input onsubmit="DashbordSearchedTask()" class="logininput" type="search" name="search" placeholder="search task">
+            <input class="logininput" type="search" name="search" placeholder="search task">
         </form>
+
         <form action="{% url 'crud' %}" method="POST" >
                 {% csrf_token %}
             <input class="crudtext" type="submit" name="delete" value="delete">
@@ -39,13 +42,54 @@
             <input class="crudtext" type="submit" name="open" value="open">
     </div> 
     {{message}}  
-        <div id="my_tasks" class="table-container">
+
+    <div id="all_tasks" class="table-container">
+        <table class="contact-table">
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Due date</th>
+                    <th>Responsible</th>
+                    <th>Related contacts</th>
+                    <th>Favorite</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                    <tr class="contact-row">
+                        <td><input type="radio" name="selected_task" value="{{ task.id }}"></td>
+                        <td>{{ task.title }}</td>
+                        <td>{{ task.category }}</td>
+                        <td>{{ task.description }}</td>
+                        <td>{{ task.due_date }}</td>
+                        <td>{{ task.responsible }}</td>
+
+                        <td style="display:flex; flex-direction:column; overflow-y:auto; height:5vh;">
+                            {% for related_contact in task.related_contacts.all %}
+                                <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
+                                    <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactlogo">
+                                    {{ related_contact.name }}
+                                </div>
+                            {% endfor %}
+                        </td>
+
+                        <td><input class="star-button" type="submit" name="add_favorite" value="add"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+        <div id="my_tasks" class="table-container" style="display:none">
             <table class="contact-table">
                 <thead>
                     <tr>
                         <th>Select</th>
                         <th>Title</th>
-                        <th>Categoty</th>
+                        <th>Category</th>
                         <th>Description</th>
                         <th>Due date</th>
                         <th>Responsible</th>
@@ -73,78 +117,6 @@
                             </td>
 
                             <td><input class="star-button" type="submit" name="add_favorite" value="add"></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div id="all_tasks" class="table-container" style="display:none">
-            <table class="contact-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Categoty</th>
-                        <th>Description</th>
-                        <th>Due date</th>
-                        <th>Responsible</th>
-                        <th>Related contacts</th>
-                        <th>Completed</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for task in tasks %}
-                        <tr class="contact-row">
-                            <td>{{ task.title }}</td>
-                            <td>{{ task.category }}</td>
-                            <td>{{ task.description }}</td>
-                            <td>{{ task.due_date }}</td>
-                            <td>{{ task.responsible }}</td>
-                            <td style="display:flex; flex-direction:column; overflow-y:auto; height:5vh;">
-                                {% for related_contact in task.related_contacts.all %}
-                                    <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
-                                        <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactlogo">
-                                        {{ related_contact.name }}
-                                    </div>
-                                {% endfor %}
-                            </td>
-                            <td>{{ task.completed }}</td>
-
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-
-        <div id="searched_tasks" class="table-container" style="display:none">
-            <table class="contact-table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Categoty</th>
-                        <th>Description</th>
-                        <th>Due date</th>
-                        <th>responsible</th>
-                        <th>Related contacts</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for task in tasks %}
-                        <tr class="contact-row">
-                            <td>{{ task.title }}</td>
-                            <td>{{ task.category }}</td>
-                            <td>{{ task.description }}</td>
-                            <td>{{ task.due_date }}</td>
-                            <td>{{ task.responsible }}</td>
-                            <td style="display:flex; flex-direction:column; overflow-y:auto; height:5vh;">
-                                {% for related_contact in task.related_contacts.all %}
-                                    <div style="display:flex; flex-direction:column; gap:5px; align-items:center;">
-                                        <img src="{% static 'contact_app/images/user1.jpg' %}" class="contactlogo">
-                                        {{ related_contact.name }}
-                                    </div>
-                                {% endfor %}
-                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

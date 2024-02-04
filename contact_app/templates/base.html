@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'contact_app/style.css' %}">
     <script src="{% static 'contact_app/js/js.js' %}" defer></script>
-    <title>Contacts app</title>
+    <title>Task manager app</title>
 </head>
 
 <body>
@@ -22,10 +22,10 @@
             {%endif%}
         </div>
         <div class="navbar">
-            <a class="navbartext" id="dashbordLink" onclick="changeColorNAV('dashbordLink')" href="{% url 'dashbord' %}">Dashbord</a>
-            <a class="navbartext" id="addLink" onclick="changeColorNAV('addLink')" href="{% url 'add_task' %}">Add Task</a>
-            <a class="navbartext" id="groupsLink" onclick="changeColorNAV('groupsLink')" href="{% url 'contacts' %}">Contacts</a>
-            <a class="navbartext" id="personalLink" onclick="changeColorNAV('personalLink')" href="{% url 'setting' %}">Personal detials</a>
+            <a class="navbartext" id="dashbordLink"  href="{% url 'dashbord' %}">Dashbord</a>
+            <a class="navbartext" id="addLink" href="{% url 'add_task' %}">Add Task</a>
+            <a class="navbartext" id="groupsLink"  href="{% url 'contacts' %}">Contacts</a>
+            <a class="navbartext" id="personalLink" href="{% url 'setting' %}">Personal Details</a>
             <a style="margin-top:20px;"class="crudtext" href="{% url 'logout' %}">Log out</a>
         </div>
     </div>
@@ -43,6 +43,8 @@
         {% block setting %}
         {% endblock %}
         {% block card %}
+        {% endblock %}
+        {% block updatecontact %}
         {% endblock %}
     </div>
 </div>

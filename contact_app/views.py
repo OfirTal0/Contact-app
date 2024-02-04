@@ -114,7 +114,7 @@ def crud(request):
             task.delete()
             return index(request, message="")
         elif 'open' in request.POST:
-            return render(request, "card.html", {"user":active_user,"type":"task","task":task})
+            return card(request,task_id,'task')
         elif 'update' in request.POST:
             users = User.objects.all()
             contacts = Contact.objects.all()
@@ -171,7 +171,8 @@ def search(request):
     searched_tasks = Task.objects.filter(
                 Q(title__icontains=text_to_search) | 
                 Q(description__icontains=text_to_search) | 
-                Q(due_date__icontains=text_to_search))
+                Q(responsible__name__icontains=text_to_search) | 
+                Q(category__category__icontains=text_to_search))  
     return index(request, message="", tasks= searched_tasks)
 
 def contacts(request):
@@ -213,14 +214,39 @@ def setting(request):
 def card(request,contact_id,type):
     user_id = request.session.get("user_id")
     active_user = User.objects.get(id=user_id)
+    data = {}
     if type == "contact":
-        contact = Contact.objects.get(id=contact_id)
+        obj = Contact.objects.get(id=contact_id)
+        data = {
+        'Name': obj.name,
+        'Category': obj.category,
+        'Company': obj.company,
+        'Role': obj.role,
+        'Email': obj.email,
+        'Phone Number': obj.phone_number,
+        'Description': obj.description,
+    }
     if type == "user":
-        contact = User.objects.get(id=contact_id)
+        obj = User.objects.get(id=contact_id)
+        data = {
+        'Name': obj.name,
+        'Role': obj.role,
+        'Address': obj.address,
+        'Phone Number': obj.phone_number,
+        'Birth day': obj.birth_day,
+        'My personal note': obj.note,
+    }
+        
     if type == "task":
-        task = Task.objects.get(id=contact_id)
-        return render(request, "card.html", {"user": active_user,"type":type,"task": task})
-    return render(request, "card.html", {"user": active_user,"type":type,"contact": contact})
+        obj = Task.objects.get(id=contact_id)
+        data = {
+        'Task': obj.title,
+        'Category': obj.category,
+        'Description': obj.description,
+        'Responsible': obj.responsible,
+        'Due date': obj.due_date
+    }
+    return render(request, "card.html", {"user": active_user,"type":type,"obj": obj,'data': data})
 
 
 def add_contact(request):
@@ -251,3 +277,45 @@ def add_contact(request):
                 message = "Problem adding the contact, please contact the administrator"
                 return render(request, "add_contact.html", {"user": active_user,"categories":categories,"message":message})
     return render(request, "add_contact.html", {"user": active_user,"categories":categories})
+
+def crud_contact(request):
+    user_id = request.session.get("user_id")
+    active_user = User.objects.get(id=user_id)
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        contact_id = request.POST.get('contact_id', '')
+        contact = Contact.objects.get(id=contact_id)
+        if 'delete' in request.POST:
+            contact.delete()
+            return contacts(request)
+        elif 'update' in request.POST:
+            return render(request, "update_contact.html", {"user": active_user,"categories":categories,"contact":contact})
+        
+
+def update_contact(request,contact_id):
+    if request.method == 'POST':
+        try:
+            if 'update' in request.POST:
+                name = request.POST.get('name', '').title()
+                email = request.POST.get('email', '')
+                phone_number = request.POST.get('phone_number', '')
+                company = request.POST.get('company', '').title()
+                role = request.POST.get('role', '').title()
+                description = request.POST.get('Description', '')
+                category_name = request.POST.get('category', '')
+
+                contact = Contact.objects.get(id=contact_id)
+                contact.name= name
+                contact.description = description
+                contact.category = Category.objects.get(category=category_name)
+                contact.email = email
+                contact.phone_number = phone_number
+                contact.company = company
+                contact.role = role
+                contact.save()
+                return contacts(request)
+            if 'cancel' in request.POST:
+                return contacts(request)
+        except:
+            message = "Problem updating the contact, please contact the administrator"
+            return index(request, message=message)
