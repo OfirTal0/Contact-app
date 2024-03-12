@@ -19,7 +19,7 @@ A web-based application that helps users organize and manage their tasks and con
 ## Getting Started
 
 ### Docker:
-docker run -p 5000:5000 ofirtal/gameonweb
+docker run -p 8000:8000 ofirtal/contacts
 
 ### Locally:
 1. Download the project.
