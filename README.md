@@ -18,6 +18,10 @@ A web-based application that helps users organize and manage their tasks and con
 
 ## Getting Started
 
+### Docker:
+docker run -p 5000:5000 ofirtal/gameonweb
+
+### Locally:
 1. Download the project.
 2. Run the project using Django.
 3. Enter user details:
