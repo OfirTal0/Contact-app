@@ -56,6 +56,7 @@ def add_task(request):
     categories = Category.objects.all()
     users = User.objects.all()
     contacts = Contact.objects.all()
+    date_time = get_date_time()
     if request.method == 'POST':
         if 'cancel' in request.POST:
             return redirect('dashboard')
@@ -86,12 +87,12 @@ def add_task(request):
                 task.related_contacts.set(Contact.objects.filter(id__in=related_contacts_ids))
                 
                 message = "Task added successfully"
-                return render(request, "add_task.html", {"user": active_user, "categories": categories, "message": message, "users": users, "contacts": contacts})
+                return render(request, "add_task.html", {"user": active_user, "categories": categories, "message": message, "users": users, "contacts": contacts,"datetime":date_time})
             except: 
                 message = "Problem adding the task, please contact the administrator"
-                return render(request, "add_task.html", {"user": active_user, "categories": categories, "message": message, "users": users, "contacts": contacts})
+                return render(request, "add_task.html", {"user": active_user, "categories": categories, "message": message, "users": users, "contacts": contacts,"datetime":date_time})
 
-    return render(request, "add_task.html", {"user": active_user, "categories": categories, "users": users, "contacts": contacts})
+    return render(request, "add_task.html", {"user": active_user, "categories": categories, "users": users, "contacts": contacts,"datetime":date_time})
 
 def crud(request):
     user_id = request.session.get("user_id")
@@ -189,8 +190,9 @@ def setting(request):
     user_id = request.session.get("user_id")
     active_user = User.objects.get(id=user_id)
     categories = Category.objects.all()
+    date_time = get_date_time()
     if request.method == 'GET':
-        return render(request, "setting.html", {"user": active_user,"categories":categories})
+        return render(request, "setting.html", {"user": active_user,"categories":categories,"datetime":date_time})
     if request.method == 'POST':
         if 'cancel' in request.POST:
             return index(request, message="")

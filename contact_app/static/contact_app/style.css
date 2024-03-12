@@ -99,6 +99,7 @@ a {
     gap: 1%;
     overflow-x: auto;
     width: 70vw;
+    height: 25vh;
     padding:1%;
 }
 
@@ -228,12 +229,29 @@ a {
     color:black;   
 
     &:hover {
-        background-color: rgba(88, 85, 85, 0.701);   
+        background-color: rgba(123, 118, 118, 0.701);   
         color:white;
         transition: all 0.5s;
         box-shadow: 1px 1px  rgba(248, 177, 177, 0.749) ;
     }
 }
+
+
+.crudtext2 {
+    background-color: rgba(123, 118, 118, 0.701);   
+    border-radius: 10px;
+    padding: 5px;
+    width: fit-content; 
+    color:black;   
+
+    &:hover {
+        background-color: rgba(248, 177, 177, 0.749); 
+        color:white;
+        transition: all 0.5s;
+        box-shadow: 1px 1px  rgba(248, 177, 177, 0.749) ;
+    }
+}
+
 
 .remove_fav {
     background-color: transparent;

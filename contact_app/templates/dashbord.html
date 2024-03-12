@@ -19,7 +19,7 @@
             <div>Due date: {{favorite_task.due_date}}</div>
             <form action="{% url 'card' favorite_task.id 'task' %}">
                 {% csrf_token %}
-                <input class="crudtext" type="submit" value="open">
+                <input class="crudtext2" type="submit" value="open">
             </form>
         </div>
         {% endfor %}
