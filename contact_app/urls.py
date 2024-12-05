@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -17,3 +19,6 @@ urlpatterns = [
     path("crud_contact/", views.crud_contact, name="crud_contact"),
     path("update_contact/<int:contact_id>/", views.update_contact, name="update_contact"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
