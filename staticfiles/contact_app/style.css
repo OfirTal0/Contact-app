@@ -1,0 +1,387 @@
+body {
+    background-image: url('/static/contact_app/images/background2.jpg');
+    background-size:cover;
+    color:white;
+    margin-left: 1%;
+    margin-right: 1%;
+
+}
+
+.userimg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    &:hover {
+        transition: all 0.5s;
+        width: 125px;
+        height: 125px;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+}
+
+.dashbord {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.section1{
+    display: flex;
+    flex-direction: column;
+    gap:60px;
+    width: 20vw;
+    background-color: rgba(237, 237, 237, 0.18);   
+    border-radius: 15px;
+    padding: 20px;
+    height: 90vh;
+    align-items: center;
+}
+
+.profilebar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: center;
+}
+
+a {
+    text-decoration: none; 
+    color: inherit; 
+    cursor: pointer; 
+}
+
+.navbartext {
+    background-color: rgba(237, 237, 237, 0.749); 
+    border-radius: 30px;
+    padding: 10px;
+    width: 120px;
+    background-size: cover;
+    color:black;
+
+    &:hover {
+        background-color: rgba(237, 237, 237, 0.18);   
+        color:white;
+        transition: all 0.5s;
+        box-shadow: 1px 1px gray ;
+    }
+}
+
+
+
+
+.section2{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    width: 75vw;
+    height: 90vh;
+    background-color: rgba(237, 237, 237, 0.18);   
+    border-radius: 15px;
+    padding: 20px;
+
+}
+
+.boxes {
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+    overflow-x: auto;
+    width: 70vw;
+    height: 25vh;
+    padding:1%;
+}
+
+.favoritebox {
+    background-color: rgba(237, 237, 237, 0.749); 
+    width: 15vw;
+    height: 20vh;
+    border-radius: 20px;
+    padding:1%;
+    display: flex;
+    flex-direction: column;
+    color: rgb(68, 68, 68);
+    align-items: center;
+    gap: 2vh;
+
+    &:hover {
+        background-color: rgba(237, 237, 237); 
+        color: black;
+        transition: all 0.5s;
+    }
+}
+.contactimg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover; 
+
+}
+
+
+.logininput {
+    padding: 5px;
+    border-radius: 7px;
+    border-color:transparent;
+    width: fit-content;
+    height:fit-content;
+    background-color:rgba(245, 245, 245, 0.829);
+}
+
+.boxlogin {
+    border-radius: 30px;
+    box-shadow: 3px 3px gray ;
+    background-color: rgba(245, 245, 245, 0.489);
+    padding: 1%;
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:15px;
+    margin-top:25vh;
+}
+
+.formlogin {
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.loginimg {
+    width: 40%;
+}
+
+
+.table-container {
+    max-height: 40vh;
+    overflow-y: auto; 
+}
+
+.contact-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px; 
+}
+
+
+.contact-table th, .contact-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+.contact-table th {
+    /* background-color: rgba(237, 237, 237, 0.9); */
+    border-bottom: 2px solid white;
+}
+
+.contact-table td {
+    border-bottom: 1px solid white;
+}
+
+.contact-row:hover {
+    background-color: rgba(237, 237, 237, 0.9);
+    color:black;
+}
+
+.addcontactform {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top:5vh;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 60vh;
+    overflow-y: auto;
+} 
+
+.inputdiv {
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.crudtext {
+    background-color: rgba(248, 177, 177, 0.749); 
+    border-radius: 10px;
+    padding: 5px;
+    width: fit-content; 
+    color:black;   
+
+    &:hover {
+        background-color: rgba(123, 118, 118, 0.701);   
+        color:white;
+        transition: all 0.5s;
+        box-shadow: 1px 1px  rgba(248, 177, 177, 0.749) ;
+    }
+}
+
+
+.crudtext2 {
+    background-color: rgba(123, 118, 118, 0.701);   
+    border-radius: 10px;
+    padding: 5px;
+    width: fit-content; 
+    color:black;   
+
+    &:hover {
+        background-color: rgba(248, 177, 177, 0.749); 
+        color:white;
+        transition: all 0.5s;
+        box-shadow: 1px 1px  rgba(248, 177, 177, 0.749) ;
+    }
+}
+
+
+.remove_fav {
+    background-color: transparent;
+    border: none;
+    width:180px;
+    &:hover {
+        color:  rgba(248, 177, 177) ;
+    }
+
+}
+
+.coulumns_container {
+    display: flex;
+    gap: 40px;
+}
+
+.sectiontwonavbar {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin-top: 5px;
+}
+
+.contactlogo {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    &:hover {
+        transition: all 0.5s;
+        width: 27px;
+        height: 27px;    
+    }
+}
+
+
+.groups {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    overflow-y: auto;
+    height: 90vh;
+}
+
+::-webkit-scrollbar {
+    width: 5px; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(190, 156, 156, 0.655);
+    border-radius: 20px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color:white;
+    border-radius: 20px;
+
+  } 
+
+.groupcontacs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap:10px;
+}
+
+.coulmngroup {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+
+.group1 {
+    background-color: rgba(237, 237, 237, 0.749); 
+    display: flex;
+    flex-direction: column;
+    width: 25vw;
+    height: 25vh;
+    border-radius: 20px;
+    padding:5%;
+    color: rgb(68, 68, 68);
+    overflow-y: scroll;
+    &:hover {
+        background-color: rgba(237, 237, 237); 
+        transition: all 0.5s;
+    }
+}
+
+
+.employees {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    overflow-y: auto;
+    height: 90vh;
+    width: 40vw;
+}
+
+
+.tasksButtonMy {
+    background-color: transparent;
+    color: white;
+    padding: 1%;
+    cursor: pointer;
+    border: none;
+    font-weight: bolder;
+    font-size: large;
+}
+
+.tasksButtonAll  {
+    background-color: transparent;
+    color: white;
+    padding: 1%;
+    cursor: pointer;
+    border: none;
+    font-weight: bolder;
+    font-size: large;
+    border-bottom: solid 1px white;
+
+}
+
+.contactCard {
+    background-color: rgba(237, 237, 237, 0.749); 
+    border-radius: 30px;
+    padding: 10px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35vw;
+    height:fit-content;
+    margin: auto;
+    gap: 6px;
+}

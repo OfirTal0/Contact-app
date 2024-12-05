@@ -268,7 +268,7 @@ def add_contact(request):
                 description = request.POST.get('description', '')
                 category = request.POST.get('category', '')
                 if Contact.objects.filter(email=email).exists() or Contact.objects.filter(name=name).exists():
-                    message = "Contact with name\email already exists"
+                    message = "Contact with name\\email already exists"
                     return render(request, "add_contact.html", {"user": active_user,"categories":categories,"message":message})
                 else:
                     contact = Contact(name=name,email=email,phone_number=phone_number,company=company,role=role,description=description,category=Category.objects.get(category=category))
