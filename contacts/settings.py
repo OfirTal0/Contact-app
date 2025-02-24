@@ -139,3 +139,6 @@ STATICFILES_DIRS = [BASE_DIR / 'contact_app' / 'static']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+          
